@@ -212,6 +212,11 @@ char	*sysroot = "", *isysroot;
 #ifndef STDINC
 #define	STDINC	  	"/usr/include/"
 #endif
+
+#ifndef EXTINC
+#define EXTINC          "/usr/lib/gcc/x86_64-redhat-linux/14/include"
+#endif
+
 #ifdef MULTIARCH_PATH
 #define STDINC_MA	STDINC MULTIARCH_PATH "/"
 #endif
@@ -1953,6 +1958,7 @@ setup_cpp_flags(void)
 		strlist_append(&sysincdirs, "=" PCCINCDIR "/c++");
 	strlist_append(&sysincdirs, "=" PCCINCDIR);
 #endif
+	strlist_append(&sysincdirs, "=" EXTINC);
 	strlist_append(&sysincdirs, "=" STDINC);
 }
 
