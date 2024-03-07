@@ -414,8 +414,8 @@ inlinetree(struct symtab *sp, NODE *f, NODE *ap)
 	gainl = 0;
 #endif
 
-	if ((is->flags & CANINL) == 0 && gainl)
-		werror("cannot inline but always_inline");
+	/* if ((is->flags & CANINL) == 0 && gainl) */
+	/* 	werror("cannot inline but always_inline"); */
 
 	if ((is->flags & CANINL) == 0 || (xinline == 0 && gainl == 0)) {
 		if (is->sp->sclass == STATIC || is->sp->sclass == USTATIC)
