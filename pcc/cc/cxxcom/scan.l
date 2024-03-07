@@ -845,7 +845,6 @@ pragma(void)
 		for (p = pragmas; p->name; p++) {
 			if (strcmp(t, p->name) == 0) {
 				if (p->fun && (*p->fun)(t))
-					uerror("bad argument to #pragma");
 				return;
 			}
 		}
