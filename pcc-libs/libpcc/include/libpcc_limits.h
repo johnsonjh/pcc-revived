@@ -12,6 +12,10 @@
 
 #endif
 
+#if !defined(MB_LEN_MAX)
+#define MB_LEN_MAX	16	/* from GLIBC */
+#endif
+
 /*
  * The following limits are sometimes considered
  * a property of the compiler. Not complete.
