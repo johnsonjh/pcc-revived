@@ -496,8 +496,8 @@ inlinetree(struct symtab *sp, P1ND *f, P1ND *ap)
 #endif
 
 	n = nerrors;
-	if ((is->flags & CANINL) == 0 && gainl)
-		werror("cannot inline but always_inline");
+	/* if ((is->flags & CANINL) == 0 && gainl) */
+	/* 	werror("cannot inline but always_inline"); */
 	nerrors = n;
 
 	if ((is->flags & CANINL) == 0 || (xinline == 0 && gainl == 0)) {
