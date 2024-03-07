@@ -214,7 +214,7 @@ char	*sysroot = "", *isysroot;
 #endif
 
 #ifndef EXTINC
-#define EXTINC          "/usr/lib/gcc/x86_64-redhat-linux/14/include"
+#define EXTINC          "/opt/pcc/lib/pcc/x86_64-pc-linux-gnu/1.2.0.DEVEL/include/"
 #endif
 
 #ifdef MULTIARCH_PATH
