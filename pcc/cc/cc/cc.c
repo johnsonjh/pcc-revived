@@ -1958,8 +1958,8 @@ setup_cpp_flags(void)
 		strlist_append(&sysincdirs, "=" PCCINCDIR "/c++");
 	strlist_append(&sysincdirs, "=" PCCINCDIR);
 #endif
-	strlist_append(&sysincdirs, "=" STDINC);
 	strlist_append(&sysincdirs, "=" EXTINC);
+	strlist_append(&sysincdirs, "=" STDINC);
 }
 
 struct flgcheck ccomflgcheck[] = {
