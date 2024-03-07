@@ -175,22 +175,22 @@ char	*sysroot = "", *isysroot;
 
 /* crt files using pcc default names */
 #ifndef CRTBEGIN_S
-#define	CRTBEGIN_S	"crtbeginS.o"
+#define	CRTBEGIN_S	"/usr/lib/gcc/x86_64-redhat-linux/14/crtbeginS.o"
 #endif
 #ifndef CRTEND_S
-#define	CRTEND_S	"crtendS.o"
+#define	CRTEND_S	"/usr/lib/gcc/x86_64-redhat-linux/14/crtendS.o"
 #endif
 #ifndef CRTBEGIN_T
-#define	CRTBEGIN_T	"crtbeginT.o"
+#define	CRTBEGIN_T	"/usr/lib/gcc/x86_64-redhat-linux/14/crtbeginT.o"
 #endif
 #ifndef CRTEND_T
 #define	CRTEND_T	"crtendT.o"
 #endif
 #ifndef CRTBEGIN
-#define	CRTBEGIN	"crtbegin.o"
+#define	CRTBEGIN	"/usr/lib/gcc/x86_64-redhat-linux/14/crtbegin.o"
 #endif
 #ifndef CRTEND
-#define	CRTEND		"crtend.o"
+#define	CRTEND		"/usr/lib/gcc/x86_64-redhat-linux/14/crtend.o"
 #endif
 #ifndef CRTI
 #define	CRTI		"crti.o"
