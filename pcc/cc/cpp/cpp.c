@@ -1301,8 +1301,9 @@ back:					if (c == '*') {
 		if (cmprepl(np->valoff, begpos) || 
 		    np->type != type || np->narg != narg) { /* not equal */
 			np->valoff = begpos;
-			warning("%s redefined (previously defined at \"%s\" line %d)",
-			    np->namep, np->file, np->line);
+			if (!(strcmp(np->namep, "__STDC_ISO_10646__") == 0))
+			    warning("%s redefined (previously defined at \"%s\" line %d)",
+			        np->namep, np->file, np->line);
 		}
 	} else
 		np->valoff = begpos;
