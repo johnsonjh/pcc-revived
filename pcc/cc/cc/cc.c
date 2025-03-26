@@ -59,7 +59,7 @@
  * OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION)
  * HOWEVER CAUSED AND ON ANY THEORY OFLIABILITY, WHETHER IN CONTRACT,
  * STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING
- * IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE 
+ * IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
  * POSSIBILITY OF SUCH DAMAGE.
  */
 
@@ -175,22 +175,22 @@ char	*sysroot = "", *isysroot;
 
 /* crt files using pcc default names */
 #ifndef CRTBEGIN_S
-#define	CRTBEGIN_S	"/usr/lib/gcc/x86_64-redhat-linux/14/crtbeginS.o"
+#define	CRTBEGIN_S	"/usr/lib/gcc/x86_64-redhat-linux/15/crtbeginS.o"
 #endif
 #ifndef CRTEND_S
-#define	CRTEND_S	"/usr/lib/gcc/x86_64-redhat-linux/14/crtendS.o"
+#define	CRTEND_S	"/usr/lib/gcc/x86_64-redhat-linux/15/crtendS.o"
 #endif
 #ifndef CRTBEGIN_T
-#define	CRTBEGIN_T	"/usr/lib/gcc/x86_64-redhat-linux/14/crtbeginT.o"
+#define	CRTBEGIN_T	"/usr/lib/gcc/x86_64-redhat-linux/15/crtbeginT.o"
 #endif
 #ifndef CRTEND_T
 #define	CRTEND_T	"crtendT.o"
 #endif
 #ifndef CRTBEGIN
-#define	CRTBEGIN	"/usr/lib/gcc/x86_64-redhat-linux/14/crtbegin.o"
+#define	CRTBEGIN	"/usr/lib/gcc/x86_64-redhat-linux/15/crtbegin.o"
 #endif
 #ifndef CRTEND
-#define	CRTEND		"/usr/lib/gcc/x86_64-redhat-linux/14/crtend.o"
+#define	CRTEND		"/usr/lib/gcc/x86_64-redhat-linux/15/crtend.o"
 #endif
 #ifndef CRTI
 #define	CRTI		"crti.o"
@@ -210,7 +210,7 @@ char	*sysroot = "", *isysroot;
 
 /* preprocessor stuff */
 #ifndef STDINC
-#define	STDINC	  	"/usr/include/"
+#define	STDINC		"/usr/include/"
 #endif
 #ifdef MULTIARCH_PATH
 #define STDINC_MA	STDINC MULTIARCH_PATH "/"
@@ -1379,7 +1379,7 @@ preprocess_input(char *input, char *output, int dodep)
 	strlist_append_list(&args, &preprocessor_flags);
 	if (ascpp) {
 		strlist_append(&args, "-A");
-		strlist_append(&args, "-D__ASSEMBLER__"); 
+		strlist_append(&args, "-D__ASSEMBLER__");
 	}
 	STRLIST_FOREACH(s, &includes) {
 		strlist_append(&args, "-i");
@@ -1446,7 +1446,7 @@ static char *
 select_linker(char *name)
 {
 	static char ld_name[8];
- 
+
 	/* Short names first.  */
 	if (strcmp(name, "bfd") == 0 ||
 	    strcmp(name, "gold") == 0 ||
@@ -1454,11 +1454,11 @@ select_linker(char *name)
 		snprintf(ld_name, sizeof ld_name, "ld.%s", name);
 		return ld_name;
 	}
- 
+
 	/* Must be absolute path otherwise.  */
 	if (name[0] != '/')
 		return LINKER;
- 
+
 	return name;
 }
 
@@ -1925,7 +1925,7 @@ setup_cpp_flags(void)
 		char buf[100]; /* larger than needed */
 		time_t t = time(NULL);
 		char *n = ctime(&t);
-	
+
 		n[19] = 0;
 		snprintf(buf, sizeof buf, "-D__TIME__=\"%s\"", n+11);
 		strlist_prepend(&preprocessor_flags, xstrdup(buf));
