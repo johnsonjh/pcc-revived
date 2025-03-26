@@ -2128,7 +2128,7 @@ fixbranch(P1ND *p, int label)
  * Write out logical expressions as branches.
  */
 static void
-andorbr(P1ND *p, int true, int false)
+andorbr(P1ND *p, int istrue, int isfalse)
 {
 	P1ND *q;
 	int o, lab;
@@ -2171,20 +2171,20 @@ andorbr(P1ND *p, int true, int false)
 	case LT:
 	case GE:
 	case GT:
-calc:		if (true < 0) {
+calc:		if (istrue < 0) {
 			p->n_op = p1negrel[p->n_op - EQ];
 			p->n_ap = attr_add(p->n_ap,
 			    attr_new(ATTR_FP_SWAPPED, 3));
 			p->n_ap->aa[0].iarg = 1;
-			true = false;
-			false = -1;
+			istrue = isfalse;
+			isfalse = -1;
 		}
 
 		rmcops(p->n_left);
 		rmcops(p->n_right);
-		fixbranch(p, true);
-		if (false >= 0)
-			branch(false);
+		fixbranch(p, istrue);
+		if (isfalse >= 0)
+			branch(isfalse);
 		break;
 
 	case ULE:
@@ -2198,9 +2198,9 @@ calc:		if (true < 0) {
 	case ULT:
 		/* Already true/false by definition */
 		if (nncon(p->n_right) && glval(p->n_right) == 0) {
-			if (true < 0) {
+			if (istrue < 0) {
 				o = o == ULT ? UGE : ULT;
-				true = false;
+				istrue = isfalse;
 			}
 			rmcops(p->n_left);
 			ecode(p->n_left);
@@ -2208,45 +2208,45 @@ calc:		if (true < 0) {
 			ecode(p->n_right);
 			p1nfree(p);
 			if (o == UGE) /* true */
-				branch(true);
+				branch(istrue);
 			break;
 		}
 		goto calc;
 
 	case ANDAND:
-		lab = false<0 ? getlab() : false ;
+		lab = isfalse<0 ? getlab() : isfalse ;
 		andorbr(p->n_left, -1, lab);
 		comops(p->n_right);
-		andorbr(p->n_right, true, false);
-		if (false < 0)
+		andorbr(p->n_right, istrue, isfalse);
+		if (isfalse < 0)
 			plabel( lab);
 		p1nfree(p);
 		break;
 
 	case OROR:
-		lab = true<0 ? getlab() : true;
+		lab = istrue<0 ? getlab() : istrue;
 		andorbr(p->n_left, lab, -1);
 		comops(p->n_right);
-		andorbr(p->n_right, true, false);
-		if (true < 0)
+		andorbr(p->n_right, istrue, isfalse);
+		if (istrue < 0)
 			plabel( lab);
 		p1nfree(p);
 		break;
 
 	case NOT:
-		andorbr(p->n_left, false, true);
+		andorbr(p->n_left, isfalse, istrue);
 		p1nfree(p);
 		break;
 
 	default:
 		rmcops(p);
-		if (true >= 0)
-			fixbranch(p, true);
-		if (false >= 0) {
-			if (true >= 0)
-				branch(false);
+		if (istrue >= 0)
+			fixbranch(p, istrue);
+		if (isfalse >= 0) {
+			if (istrue >= 0)
+				branch(isfalse);
 			else
-				fixbranch(buildtree(EQ, p, bcon(0)), false);
+				fixbranch(buildtree(EQ, p, bcon(0)), isfalse);
 		}
 	}
 }
